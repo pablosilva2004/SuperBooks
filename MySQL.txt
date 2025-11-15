@@ -1,0 +1,20 @@
+- Primeiro, baixe o Xampp: https://www.apachefriends.org/pt_br/index.html
+- Após baixar, dê start no Apache (servidor) e no MySQL (SGBD)
+- Acesse na barra de endereço: localhost/phpmyadmin/
+- crie um banco de dado chamado: sistema_superbooks
+- depois você utiliza o SQL para criar as tabelas:
+
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE livros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    imagem VARCHAR(255) NOT NULL,
+    desconto INT DEFAULT 0 NOT NULL,
+    categoria_id INT,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+);

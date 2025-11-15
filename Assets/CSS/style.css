@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Onest", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin-top: 160px;
+    background-color: #f0f0f0;   
+}
+
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 6;
+    background-color: #f0f0f0;       
+    border-bottom: 1px solid #d1d5db; 
+    padding: 20px 0;
+    box-shadow: 0px 3px 15px -7px #000000;
+}
+
+/* CONTAINER CENTRALIZADO */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.nav-logo img {
+    height: 50px;
+    width: auto;
+}
+
+.nav-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-admin img {
+    height: 50px;
+    width: auto;
+}
+
+.nav-admin a {
+    text-decoration: none;
+    color: #000;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+}
+
+.books-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    z-index: 4;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    transition: all 0.5s ease;
+}
+
+.card:hover {
+    z-index: 4;
+    transform: translateY(-0.5rem);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card button {
+    background: #07c35a;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.price-gross {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 14px;
+}
+
+.price-net {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 18px;
+}
