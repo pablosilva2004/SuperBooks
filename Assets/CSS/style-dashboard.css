@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Onest", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin-top: 160px;
+    background-color: #f0f0f0;   
+}
+
+/* ==================== HEADER E FOOTER DO SITE ====================*/
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    z-index: 6;
+    background-color: #f0f0f0;       
+    border-bottom: 1px solid #d1d5db; 
+    padding: 20px 0;
+    box-shadow: 0px 3px 15px -7px #000000;
+}
+
+/* CONTAINER CENTRALIZADO */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.nav-logo img {
+    height: 50px;
+    width: auto;
+}
+
+.nav-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-admin img {
+    height: 50px;
+    width: auto;
+}
+
+.nav-admin a {
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease;
+}
+.nav-admin a:hover {
+    color: #ff0000;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0; 
+    font-size: 13px;
+    box-shadow: 0px -7px 15px -7px #000000;
+}
+
+/* ==================== DASHBOARD ====================*/
+/* CRIAR NOVO PRODUTO*/
+.dashboard-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.btn-criar {
+    background: #07c35a;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-criar:hover {
+    background: #3e8e41;
+}
+
+/* TABELA */
+.tabela {
+    width: 90%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.tabela thead {
+    background: #4a4a4a;
+    color: #fff;
+}
+
+.tabela th, 
+.tabela td {
+    padding: 14px 18px;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.tabela tbody tr:nth-child(even) {
+    background: #f6f6f6;
+}
+
+.tabela tbody tr:hover {
+    background: #eaeaea;
+    transition: 0.2s;
+}
+
+/* BTN AÇÕES */
+.btn {
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.btn.editar {
+    background: #2d8cff;
+    transition: all 0.3s ease;
+}
+
+.btn.editar:hover {
+    background: #1b6cd8;
+}
+
+.btn.excluir {
+    background: #ff4747;
+    transition: all 0.3s ease;
+}
+
+.btn.excluir:hover {
+    background: #d93636;
+}
