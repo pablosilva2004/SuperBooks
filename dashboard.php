@@ -31,11 +31,11 @@ include('conexao.php');
     </header>
     <!--
     ============================== SOBRE A DASHBOARD ============================================================
-    Div de ações da Dashbaord (Criar um novo livro)
-    Pegando as categorias + consulta (query)
-    While criando as tabelas e separando por categorias e seus respectivos livros
-        pegando o id da categoria
-        Pegando os livros dessa categoria em específica e colocando em ordem alfabética
+    1 - Div de ações da Dashbaord (Criar um novo livro)
+    2 - Pegando as categorias + consulta (query)
+    3 - While criando as tabelas e separando por categorias e seus respectivos livros
+        4 - pegando o id da categoria
+        5 - Pegando os livros da categoria selecionada pelo while e coloca em ordem alfabética
             -> pega todas as colunas da tabela livro
             -> dizemos que estamos consultando a tabela livros com o apelido de l
             -> JOIN = juntar. Ou seja, o id da categoria é igual ao categoria_id (Chave estrangeira de livros)
@@ -43,7 +43,7 @@ include('conexao.php');
             -> Ordenamos os livros em ordem alfabética (título de A - Z)
         + consulta (query)
 
-
+        6 - While filho que coloca as informações dos livros já separados por ordem alfabética
     =========================================================================================================
     -->
     <main>
@@ -89,7 +89,6 @@ include('conexao.php');
                             <td>R$ <?= number_format($l['preco'], 2, ',', '.') ?></td>
                             <td><?= intval($l['desconto']) ?>%</td>
                             <td>R$ <?= number_format($l['preco'] - ($l['preco'] * ($l['desconto'] / 100)), 2, ',', '.') ?></td>
-
                             <td>
                                 <a class="btn editar" href="editar.php?id=<?= $l['id'] ?>">Editar</a>
                                 <a class="btn excluir" href="excluir.php?id=<?= $l['id'] ?>" onclick="return ConfirmarExclusao()">Excluir</a>

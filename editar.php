@@ -1,14 +1,15 @@
 <?php 
 include('conexao.php');
 
-// PEGAR ID DO LIVRO
+
 if (!isset($_GET['id'])) { // Se o ID não for encontrado, exibe Livro não encontrado
     die("Livro não encontrado!");
 }
 
+// ID encontrado? Pegue o ID do livro
 $id = intval($_GET['id']);
 
-// BUSCAR DADOS DO LIVRO
+// Pegando o ID do livro e adicionando o ID já criado nele + consulta (query)
 $sqlLivro = "SELECT * FROM livros WHERE id = $id";
 $resultLivro = $conexao->query($sqlLivro);
 
@@ -18,24 +19,23 @@ if ($resultLivro->num_rows == 0) {
 
 $livro = $resultLivro->fetch_assoc();
 
-// BUSCAR CATEGORIAS
+// Pegando as categorias e colocando em ordem alfabética + consulta (query)
 $sqlCategorias = "SELECT * FROM categorias ORDER BY nome ASC";
 $resultCategorias = $conexao->query($sqlCategorias);
 
-// SALVAR ALTERAÇÕES
-if (isset($_POST['salvar'])) {
+// --- SALVAR ALTERAÇÕES --- //
+if (isset($_POST['salvar'])) { // Salvar foi pressionado, então salvamos as informações
 
     $titulo = $_POST['titulo'];
     $preco = $_POST['preco'];
     $categoria_id = $_POST['categoria_id'];
     $desconto = $_POST['desconto'];
 
-    // IMAGEM ATUAL
+    // Selecionando a imagem atual
     $imagemAtual = $livro['imagem'];
     $novaImagem = $imagemAtual;
 
-    // SE O USUÁRIO TROCAR A IMAGEM
-    if (!empty($_FILES['imagem']['name'])) {
+    if (!empty($_FILES['imagem']['name'])) { // SE O USUÁRIO TROCAR A IMAGEM
         $nomeArquivo = time() . "_" . $_FILES['imagem']['name'];
         $caminho = "./Assets/Uploads/" . $nomeArquivo;
 
@@ -47,15 +47,15 @@ if (isset($_POST['salvar'])) {
     }
 
     // UPDATE FINAL
-    $sqlUpdate = "UPDATE livros 
-                  SET titulo = '$titulo',
-                      preco = '$preco',
-                      categoria_id = '$categoria_id',
-                      desconto = '$desconto',
-                      imagem = '$novaImagem'
-                  WHERE id = $id";
+    $sqlUpdate = "UPDATE livros
+              SET titulo = ?, preco = ?, categoria_id = ?, desconto = ?, imagem = ?
+              WHERE id = ?";
 
-    if ($conexao->query($sqlUpdate)) {
+    $stmt = $conexao->prepare($sqlUpdate);
+    $stmt->bind_param("sdiisi", $titulo, $preco, $categoria_id, $desconto, $novaImagem, $id);
+    $stmt->execute();
+
+    if ($stmt->execute()) {
         header("Location: dashboard.php");
         exit;
     } else {
@@ -95,7 +95,7 @@ if (isset($_POST['salvar'])) {
 
         <form action="" method="POST" enctype="multipart/form-data">
             <label>Título:</label>
-            <input type="text" name="titulo" value="<?= $livro['titulo'] ?>" required><br><br>
+            <input type="text" name="titulo" value="<?= htmlspecialchars($livro['titulo']) ?>"><br><br>
 
             <label>Preço:</label>
             <input type="number" step="0.01" name="preco" value="<?= $livro['preco'] ?>" required><br><br>

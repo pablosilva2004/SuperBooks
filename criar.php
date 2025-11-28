@@ -1,22 +1,21 @@
 <?php
 include('conexao.php');
 
-// Buscar categorias para o select
+// Pegando as categorias e ordenando em ordem alfabética + consulta (query)
 $sqlCat = "SELECT * FROM categorias ORDER BY nome ASC";
 $resCat = $conexao->query($sqlCat);
 
-// Se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Formulário enviado
 
     $titulo = $_POST['titulo'];
     $preco = floatval($_POST['preco']);
     $desconto = intval($_POST['desconto']);
     $categoria_id = intval($_POST['categoria_id']);
 
-    // Upload da imagem
-    $imagem = null;
+    $imagem = null; // Escolha da imagem (Começa como null)
 
-    if (!empty($_FILES['imagem']['name'])) {
+    if (!empty($_FILES['imagem']['name'])) { // Imagem e nome do livro escolhidos
         $nomeImg = time() . "-" . $_FILES['imagem']['name'];
         $caminho = "./Assets/Uploads/" . $nomeImg;
 
@@ -25,14 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Inserir no banco de dados
+    // Inserindo as informações escolhidas pelo usuário
     $sql = "INSERT INTO livros (titulo, preco, desconto, categoria_id, imagem)
             VALUES (?, ?, ?, ?, ?)";
 
+    // Preparando o banco de dados
+    // Adicionando os parâmetros nos buracos dos values -> ?, ?, ?, ?, ?
+    // Executa :)
+    // Após criar o livro, volta para a dashboard
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("sdiis", $titulo, $preco, $desconto, $categoria_id, $imagem);
     $stmt->execute();
-
     header("Location: dashboard.php");
     exit;
 }

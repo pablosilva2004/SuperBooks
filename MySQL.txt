@@ -33,7 +33,9 @@ INSERT INTO livros (titulo, categoria_id, preco, desconto, imagem) VALUES
 ('Neon Genesis Evangelion Collector''s Edition Vol. 1', 2, 89.90, 10, 'Neon-Genesis-Evangelion-Collector_s-Edition-Vol-1.jpg'),
 ('O Menino que Olhava para o Céu', 3, 32.90, 0, 'O-Menino-Que-Olhava-Para-O-Céu.jpg'),
 ('One Piece Vol. 41', 2, 39.90, 0, 'One-Piece-Vol-41.jpg'),
-('Renato Cariani: Fique Sliced!', 1, 449.90, 20, 'Renato-Cariani.png'),
 ('Scott Pilgrim Contra o Mundo Vol. 1', 1, 69.90, 0, 'Scott-Pilgrim-Contra-O-Mundo-Vol-1.jpg'),
 ('Surfista Prateado: Réquiem Vol. 2', 1, 54.90, 0, 'Surfista-Prateado-Réquiem-Vol-2.jpg'),
 ('Turma da Mônica: Mônica em Paris Vol. 31', 3, 29.90, 0, 'Turma-Da-Mônica-Mônica-Em-Paris-Vol-31.jpg');
+
+- Rode o site acessando na barra de endereço: localhost
+- Depois selecione a pasta

@@ -1,8 +1,8 @@
 <?php 
-include('conexao.php'); // CONEXÃO COM O BANCO DE DADOS
+include('conexao.php'); // Conexão com o banco de dados
 
-$sqlCategorias = "SELECT * FROM categorias"; // BUSCA AS CATEGORIAS
-$resultCategorias = $conexao->query($sqlCategorias); // FAZ A CONSULTA (QUERY) E ADICIONA NO $sqlCategorias
+$sqlCategorias = "SELECT * FROM categorias"; // Seleciona as categorias
+$resultCategorias = $conexao->query($sqlCategorias); // Faz a consula (Query) e adiciona no $sqlCategorias
 ?>
 
 <!DOCTYPE html>
@@ -35,26 +35,21 @@ $resultCategorias = $conexao->query($sqlCategorias); // FAZ A CONSULTA (QUERY) E
     <main>
     <!--
     ============================== SOBRE O INDEX ============================================================
-    O primeiro while vai separar as categorias (HQ / MANGÁ / INFANTIL) fetch_assoc vai ser true quando ainda 
+    1 - O primeiro while vai separar as categorias (HQ / MANGÁ / INFANTIL) fetch_assoc vai ser true quando ainda 
     tiver categorias, caso não tenha, é falso e acaba o while :)
-        h1 recebe o nome da categoria
-        Pegando o ID da categoria atual
-        Pegar todos os livros que pertencem a essa categoria + consulta (query)
-        Cria o container dos livros da categoria
-        While que busca livros da categoria selecionada pelo while pai
-            Pegando o preço do livro
-            Pegando o desconto do livro
-            Fazendo o cálculo do preço final / preço com desconto
-            
-            Cria o card do livro e suas informações
-                Mostra a imagem
-                Se houver desconto, mostrar o preço antigo e o novo
-                Se não houver, mostrar só o preço normal
+        2 - h1 recebe o nome da categoria
+        3 - Pegando o ID da categoria atual
+        4 - Pegar todos os livros que pertencem a essa categoria + consulta (query)
+        5 - Cria o container dos livros da categoria
+        6 - While que busca livros da categoria selecionada pelo while pai
+            7 - Pegando o preço do livro
+            8 - Pegando o desconto do livro
+            9 - Fazendo o cálculo do preço final / preço com desconto
     =========================================================================================================
     -->
         <?php 
         while ($categoria = $resultCategorias->fetch_assoc()) { ?> 
-            <h1 class='category'><?= $categoria['nome']?></h1> 
+            <h1 class='category'><?= htmlspecialchars($categoria['nome']) ?></h1>
             
             <?php
             $categoria_id = $categoria['id']; 
@@ -72,8 +67,8 @@ $resultCategorias = $conexao->query($sqlCategorias); // FAZ A CONSULTA (QUERY) E
             ?>
                 
                 <div class='card'>
-                    <img src='./Assets/Uploads/<?= $livro['imagem']?>' alt='<?= $livro['titulo']?>'>
-                    <h3><?=$livro['titulo'] ?></h3>
+                    <img src="./Assets/Uploads/<?= htmlspecialchars($livro['imagem']) ?>" alt="<?= htmlspecialchars($livro['titulo']) ?>">
+                    <h3><?= htmlspecialchars($livro['titulo']) ?></h3>
 
                     <?php
                     if($desconto > 0) { ?> 
@@ -86,7 +81,7 @@ $resultCategorias = $conexao->query($sqlCategorias); // FAZ A CONSULTA (QUERY) E
                     <?php
                     }
                     ?> 
-                    <button onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1'">
+                    <button>
                         Comprar
                     </button>
                 </div>
@@ -103,3 +98,59 @@ $resultCategorias = $conexao->query($sqlCategorias); // FAZ A CONSULTA (QUERY) E
     </main>
 </body>
 </html>
+
+<!--
+Feito por/Made by: Pablo Silva
+Obrigado por visitar, considere deixar uma estrela no repositório!
+Thanks for visiting, please consider leaving a star on this repository!
+
+MERRY CHRISTMAS!
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⡛⢿⣿⡿⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣕⣹⣕⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⡿⣱⣿⡏⣾⠿⣛⣛⠻⠿⣟⡻⣛⡻⠿⣛⠟⣛⠻⣿⣟⢻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⣧⣺⢟⣹⣿⣿⣿⣿
+⣿⣿⣿⣿⣧⣾⣔⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡜⣿⣴⠋⣿⡇⡏⣾⠥⢼⠷⣨⣿⣏⣙⣣⡎⣿⢩⣛⣱⡜⣿⡜⠸⣱⣿⣿⣿⣿⣿⣿⣿⣿⣯⠊⣼⡪⣽⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠿⢙⡜⢣⣣⠿⣧⢣⡻⢧⡭⢅⡫⢿⣧⣻⣿⣷⣿⣼⣿⣿⠿⠜⡿⣱⣿⣿⣿⣿⣿⣿⣿⣿⣿⢖⡵⠈⣕⢼⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣛⣿⣛⣛⠟⣛⡟⣿⣿⣿⣿⣿⣿⣿⣿⢟⣿⢻⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣇⡻⠖⣱⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣰⣷⣘⣾⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢣⣾⢫⣶⣮⠻⣰⢹⡇⣛⣟⢻⢟⣛⡿⣻⡛⢊⣉⢺⢟⡻⢟⡟⢫⣾⣼⡿⣛⣻⢟⣻⡻⣛⣿⡻⡿⣛⠯⣝⢻⡿⢛⠿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⡜⢿⣿⢿⢿⢸⡏⣦⣿⡇⣷⣿⡏⣼⣥⡆⣿⢸⠸⢷⣥⡑⡇⣿⢸⣿⢼⣿⢱⢸⣿⣴⣿⡇⡧⣉⠦⣿⡇⡇⠻⣶⣬⢺⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⠿⣿⣧⣙⠿⠷⢶⣋⡌⠾⣧⣉⠿⣷⣫⣿⣧⣽⣿⣥⣿⣌⠳⠥⠼⣣⣇⡻⠿⣋⠼⣿⣌⠼⣿⣉⠿⢧⣜⠿⢬⡻⠷⣁⢦⠤⢟⣽⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣟⣻⣿⣿⠃⣤⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠛⣉⣉⣉⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡻⢿⣿⣿⣿
+⣿⣿⣿⠛⣋⣉⣁⣼⣿⣧⣌⣉⣙⠛⣿⣿⣿⡿⠉⠙⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⢉⣠⣶⣾⣿⣿⣿⣿⣿⣷⣦⣌⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⣏⣿⣿⣿
+⣿⣿⣿⣷⣌⠻⣿⣿⣿⣿⣿⠟⣁⣴⣿⣿⣿⠀⢠⡙⢷⣦⣌⠙⠿⣿⣿⣻⣿⣿⠿⢋⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣿⡦⠈⠋⣉⣠⠤⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⠁⣿⡿⠿⢿⣿⡀⣿⣿⣿⣿⡇⠀⣿⣿⣆⠹⣿⣿⣦⣈⠛⠿⠟⠁⠐⠛⢋⣉⡛⠛⠻⠿⠿⠿⣿⣿⣿⣿⠟⠂⣠⣴⣶⠿⢋⣤⣶⠁⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣯⡀⢉⣤⣶⣤⡉⠃⣿⣿⣿⣿⠇⢸⣿⣿⣿⣦⠸⣿⣿⡟⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣶⣾⣶⣶⣤⡉⠋⢠⣴⣿⣿⡿⢋⣴⣿⣿⣿⠀⢸⣿⣿⣿⣟⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⠟⣠⣾⣿⣿⣿⣷⣄⠹⣿⣿⣿⠀⣿⣿⡏⠠⣤⣄⠹⠿⠃⠘⠛⠛⠛⠛⠻⠿⠿⠿⠿⢿⣿⣿⣿⣿⣷⣶⣦⡈⢻⠏⠀⠛⠻⣿⣿⣿⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠟⢁⣴⣿⣿⡟⠋⢉⡉⢻⣦⡈⠻⣿⠀⢿⣿⠉⢤⣼⠟⢀⣴⣾⣿⣿⠿⢿⣿⣶⣶⣶⣶⣶⣦⣤⣉⣉⡉⠻⢿⣿⡿⠀⣴⣿⠟⢁⣼⣿⣿⠀⣼⣦⠘⠛⡛⠻⢿⣿⣿⣿
+⠟⢋⣴⣿⣿⣿⣿⡇⢢⣾⡻⢀⣿⣿⣦⡘⠂⢸⣿⣷⠄⢁⣴⣿⣿⣿⣿⡏⢰⣿⣿⣿⣿⣿⣿⣿⡟⢿⣿⣿⣿⣶⣦⣤⣴⣦⡈⠻⣶⠄⢹⣿⡿⢀⡉⢉⣁⣸⣿⣷⠈⢿⣿⣿
+⣶⣿⠱⠹⠿⣿⣿⣿⣦⣤⣴⣾⣿⣿⣿⣿⡆⠸⡿⠁⡴⣻⣿⣿⣿⣿⠟⠀⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⡏⢻⣿⣿⣿⡿⢆⠀⣶⣿⣿⠇⢸⡇⢸⣿⣿⣿⣿⡇⢸⣿⣿
+⣿⣿⣿⣌⣃⢛⡻⣿⣿⣿⣿⣿⣿⠿⣿⣿⣿⠀⢀⣾⣿⣷⣿⣿⠿⠁⠼⢸⣿⣿⣿⣿⣿⣿⣿⣿⠁⠘⣿⣿⣿⣿⡄⢿⣿⣿⣿⣎⣧⠘⣿⡿⢀⣿⣿⣆⠙⠿⠟⢉⣠⣾⣿⣿
+⠛⢋⡁⢿⣿⣾⢶⡰⢪⢩⣹⢿⢿⡦⢌⡉⠉⠀⣾⣿⣿⡏⣹⡁⢠⣾⣷⠸⣿⠻⣿⣿⣿⣿⢹⡏⢰⣦⠀⣌⡙⢿⣧⠸⣿⣿⣿⣿⣿⡆⠸⠁⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣾⣿⣷⣤⣭⣤⣾⣿⣿⣶⣾⣬⣵⣘⣃⣔⠃⣸⣿⣿⣿⠁⠏⣰⡿⠿⢿⡄⢻⠀⢿⣿⣿⡇⡘⢠⣿⣿⣧⡘⢿⣾⣿⠀⣿⣿⣿⣿⡿⢿⡀⣄⠘⣿⣿⣿⣿⣿⣿⡿⣪⣽⣿⣿
+⣿⡟⡩⢤⣍⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠏⢸⣿⣧⠈⠰⠉⣠⠄⠀⢬⣄⢀⣄⠙⢿⠀⣴⣟⣉⣀⣀⠉⠂⡙⠿⡄⣿⣿⣿⣿⣇⢸⡇⢹⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⡀⢷⣾⡿⢀⣿⣿⣿⣿⡟⠁⢠⣄⢹⣿⣇⠐⠘⣿⣇⢠⠁⣼⠁⠀⢴⠀⢻⣿⣿⣷⣶⣶⣿⡟⠁⣄⠀⠈⢂⠈⢦⠀⣿⣿⣿⣿⡟⢸⣷⣾⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣦⣤⣴⣿⣿⣿⣿⣿⣧⠘⠿⠋⣸⣿⣿⠁⣤⡈⠻⠈⡧⣿⠀⡀⠀⡀⣸⣿⣿⣿⣿⣿⣿⡇⠀⠁⠀⠀⢸⡇⣰⢀⣿⣿⣿⣿⡇⣸⣿⣿⡄⢻⣿⣿⣿⠏⣴⣤⣬⣉⠛⠻
+⣿⠿⠛⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⠃⣸⢿⣿⡷⢀⠿⣮⣂⣙⣋⣠⣿⣿⣻⣿⣿⣿⣿⣇⠘⢦⠴⢁⠞⣩⠇⣸⣿⣿⣿⣿⠀⣿⣿⣿⣷⡀⢻⣿⣿⠄⡙⠛⠿⢿⡿⢀
+⣴⣶⡄⠻⢿⣿⡿⠟⣁⣄⠻⠿⠿⢉⣙⡋⢰⡏⢸⣿⣷⠸⣌⣘⣺⣿⣿⣿⣏⠛⣋⡙⠛⢻⣿⣿⣷⣶⣒⡛⠿⠋⠴⢋⣽⣿⣿⠇⣸⢹⣿⣿⠙⣷⠈⣿⡟⢠⣿⣿⣶⡆⢠⣾
+⣿⣿⢿⣷⣶⣶⣶⣾⣿⣿⣷⣶⣶⣿⣿⣇⠸⠀⠘⣿⣿⡀⠹⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⢘⣿⣿⣿⣿⣶⣿⣶⠆⣸⣿⣿⣿⠏⣰⣿⢸⣿⡿⠀⢸⠀⣿⠃⣼⣿⣿⣿⠁⣾⣿
+⣿⣗⣗⢟⡛⣿⣿⣿⣿⡟⢁⢠⣄⠹⣿⣿⣦⣀⣆⠙⢿⣇⠰⣄⠙⠻⠿⣿⣿⣧⣈⣛⣋⣼⣿⣿⣿⣿⠿⠛⠁⢠⣿⣿⠟⠁⣴⡿⠃⢸⡿⢁⡄⠈⣴⣿⡀⢻⣿⣿⣿⣷⡌⢻
+⣿⣿⣿⣦⣵⡱⠎⢟⡻⡆⠳⠿⠟⢠⣿⣿⣿⣿⡉⠓⠄⢉⣀⡉⠀⡐⠂⢀⣈⡉⠉⠉⣉⣉⡉⠉⠀⢀⠤⢀⠴⠟⠋⢁⠄⠰⠋⣠⠀⣉⣤⣾⣿⣿⣿⣿⣿⣦⡈⠻⠿⠿⠃⣼
+⣿⡿⠋⢉⠛⢿⣿⣮⣵⣐⢃⡆⡌⠛⡛⠿⠿⢿⠿⢿⢧⠈⠻⣿⡿⢋⡁⠘⠻⠿⣧⠐⠟⢁⣴⣾⣿⣿⣶⡶⠀⠲⣾⣿⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿
+⣿⡀⢬⣼⡇⢸⣿⣿⣿⣿⣿⣷⣶⣧⣭⣦⣛⣼⣘⣸⣬⣼⡶⠈⣠⣿⠁⣾⡷⠦⠈⣡⠈⣡⣤⣶⣦⠈⣉⣤⣾⣦⠈⢿⣿⡟⢛⠿⡿⣿⣿⣿⡿⠋⣁⣤⣤⣄⠙⣿⣿⣿⣿⣿
+⣿⣷⣤⣭⣤⣿⣿⣿⣿⣏⠙⣿⣿⡍⠻⣿⡟⢁⣤⣄⠙⠟⢠⣾⡿⠹⠐⠛⠓⠶⠈⠛⠠⣶⣾⣿⡟⠰⢻⣿⣿⣿⣧⠈⣿⣏⣱⢹⣎⣽⣿⠏⣠⣾⣿⣿⠿⠛⢀⣿⣿⣿⣿⣿
+⠿⠋⢿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣭⣤⣶⡄⢠⣿⣿⣿⠷⠀⠛⠻⢁⣤⣾⣿⣷⠀⢁⠀⣷⣌⠙⠛⠁⢠⣿⣿⣿⣿⣿⡆⢸⣿⣿⣿⣿⣿⡏⢰⣿⣿⠟⢁⣴⣾⣿⣿⣿⣿⣿⣿
+⣶⣿⣄⠛⢿⣿⣿⠿⢛⣿⣿⣿⣿⣿⠿⠇⠀⠰⢦⢌⠀⢰⣿⠀⠩⠛⠛⠻⢿⠇⠼⠆⢿⣿⠦⠹⠁⠛⠛⠛⠿⠿⢿⣿⠈⣿⣿⣿⣿⣿⠃⣾⣿⡟⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣷⣦⣤⣤⣶⡿⠿⢿⣿⡏⢠⣄⣘⡛⢂⣠⣤⠖⢂⣠⣤⣀⡘⠉⠁⢈⡀⢂⣠⠀⣤⣴⢠⣶⣿⣿⣿⣶⣶⣦⡈⠀⢿⣿⣿⣿⣿⠀⣿⣿⡇⢸⣿⣿⠿⠛⣿⢿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⡏⡠⢰⣦⠹⡇⠸⢿⣿⣿⢸⣿⡟⢰⣶⣦⣬⡽⣭⣴⡆⣿⡇⢸⡿⠀⣿⣷⡈⠉⣩⣈⠛⠛⠛⢿⣿⣿⠀⣿⣿⣿⣿⡄⣿⣿⡇⢸⣿⣟⠧⢓⠀⡫⣿⢿⣿
+⣝⣿⣛⢻⣿⣿⣿⣇⠙⠛⢋⣰⠏⠀⣦⣤⣌⢸⣿⡇⠘⠻⠿⢿⡇⡿⠿⠃⣿⠇⢠⠄⢈⣉⠙⢉⣤⣌⣽⣿⡿⠀⠶⠚⣉⣠⣿⣿⣿⣿⡇⣿⣿⡇⢸⣿⣯⣝⢕⢹⣔⢭⣾⣿
+⣿⣿⣮⣎⠶⠹⣛⢿⣿⣿⣿⡇⠸⡧⠘⣿⣿⢸⣿⡇⢸⣿⣶⣶⡄⣶⣾⠇⠠⠲⣦⣤⡙⢿⣿⡆⢹⣿⣿⣿⠃⠄⠰⣿⣿⣿⣿⣿⣿⣿⠃⣿⣿⡇⢸⣿⣿⣯⣏⣾⣮⣾⣿⣿
+⣿⣿⣿⣿⣿⣧⣭⣌⠶⡹⣛⠃⠸⡷⠈⣿⣿⢸⣿⡇⢸⣿⣿⣿⡇⣿⠁⣴⣾⣿⣿⣿⣧⠸⣿⡇⠸⠟⢋⣀⣤⣶⣦⡈⠻⣿⣿⣿⣿⠏⣰⣿⣿⠁⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⠿⠋⣿⣿⣿⣿⣿⡿⠻⣷⣬⣦⣐⠀⢾⣿⣿⢸⣿⡇⢸⣿⣿⣿⡇⣯⠐⣿⣿⣿⣿⣿⠏⠸⠿⠃⣴⣿⣿⣿⣿⣿⣿⣿⣦⡈⠿⠛⣁⣴⣿⡿⢁⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣾⣆⠙⠛⠛⠛⢉⣤⣦⣌⡙⠻⠿⠷⠆⢠⣍⣈⠛⠃⠸⠿⢿⣿⡇⣿⠷⠄⠉⣉⣉⣤⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⠹⠟⠟⠋⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⡇⢰⣶⣶⣾⣿⠟⠋⢰⣿⣷⣶⣦⣤⣬⣤⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⢰⣦⡈⢻⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠟⢉⣩⡄⢸⣿⣿⣿⡇⢠⢭⣉⠛⠃⣴⣃⡘⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠟⢠⣾⣿⡧⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⡀⣤⣤⣥⣈⣉⣉⣉⣁⣨⣥⣤⠀⡀⢿⣿⣿⣦⣈⣉⣉⠛⠻⢿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠛⠛⢁⣴⣶⣾⣿⣿⠿⠃⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣧⠉⠛⠻⠿⠿⠿⠿⠿⠛⠛⠃⣸⣷⣄⠉⢿⣿⣿⣿⣿⣿⣷⣤⣶⣶⣦⣤⣉⣡⣤⣤⣤⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⣴⣾⣿⣿⡿⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⠀⣿⣿⣷⣶⣶⣶⣿⣿⣿⠀⣿⣿⣿⣷⣤⣉⠛⠻⠿⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⢉⣉⣡⣴⣾⣿⣿⣿⣿⣟⣩⡛⣴⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⡇⠸⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣶⠀⣤⣉⣉⣛⣉⣉⡌⠙⠛⠛⠛⢋⣉⣤⣬⣭⠁⢠⣴⣄⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣦⣤⣌⣉⣉⣉⣥⣤⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⢰⣮⣭⣿⣿⣿⡇⢸⢰⣭⣟⣿⣿⣯⣵⡖⢠⣄⠹⡽⡆⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⣧⠀⠸⣿⣿⣿⣿⣿⣿⢁⠈⣿⠀⣿⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+-->
